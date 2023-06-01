@@ -17,6 +17,10 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     
     "depends": ["base"],
     
+    "demo": [
+        "demo/motorcycle_register_demo.xml",
+    ],
+    
     "author": "kauil-motors",
     
     "website": "www.odoo.com",

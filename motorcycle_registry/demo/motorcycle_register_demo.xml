@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="register_01" model="motorcycle.register">
+            <field name="register_number">000001</field>
+            <field name="vin">Learn ERP Systems</field>
+            <field name="first_name">Keanu</field>
+            <field name="last_name">Reyes</field>
+            <field name="current_mileage">10000</field>
+            <field name="license_plate">Y67G4</field>
+        </record>
+        <record id="register_02" model="motorcycle.register">
+            <field name="register_number">000002</field>
+            <field name="vin">Learn ERP Systems</field>
+            <field name="first_name">Evel</field>
+            <field name="last_name">Knievel</field>
+            <field name="current_mileage">3400</field>
+            <field name="license_plate">KL453</field>
+        </record>
+        <record id="register_03" model="motorcycle.register">
+            <field name="register_number">000003</field>
+            <field name="vin">Learn ERP Systems</field>
+            <field name="first_name">Ewan</field>
+            <field name="last_name">McGregor</field>
+            <field name="current_mileage">100</field>
+            <field name="license_plate">J32KL</field>
+        </record>
+    </data>
+</odoo>
