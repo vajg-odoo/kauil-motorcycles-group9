@@ -21,10 +21,11 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
         "security/motorcycle_registry_groups.xml",
         "security/ir.model.access.csv",
         "views/motorcycle_registry_menuitems.xml",
+        "views/motorcycle_registry_views.xml",
     ],
     
     "demo": [
-        "demo/motorcycle_register_demo.xml",
+        "demo/motorcycle_registry_demo.xml",
     ],
     
     "author": "kauil-motors",

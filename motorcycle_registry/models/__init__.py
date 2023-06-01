@@ -1,1 +1,1 @@
-from . import motorcycle_register
+from . import motorcycle_registry
