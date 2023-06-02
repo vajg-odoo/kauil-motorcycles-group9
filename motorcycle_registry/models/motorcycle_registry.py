@@ -8,9 +8,7 @@ class MotorcycleRegistry(models.Model):
     _name = 'motorcycle.registry'
     _description = 'Motorcycle Registry'
     _rec_name = 'registry_number'  
-    # _sql_constraints = [
-    #     ('vin_unique', 'UNIQUE(vin)', 'Another registration for this VIN Number already exists.')
-    # ]
+
     
     registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='MRN0000')
     vin = fields.Char(string='VIN', required=True)
@@ -22,11 +20,7 @@ class MotorcycleRegistry(models.Model):
     certificate_title = fields.Binary(string='Certificate of Title')
     registry_date = fields.Date(string='Registration Date')
     active = fields.Boolean(string='Active')
-    
-    # @api.constrains('vin')
-    # def _check_unique_vin(self):
-    #     all_vin = [v for v in self.mapped('vin') if v]
-    #     domain = ['vin','in',all_vin]
+
         
     @api.constrains('license_plate')
     def _check_license_plate_size(self):
