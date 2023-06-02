@@ -20,6 +20,7 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     "data": [
         "security/motorcycle_registry_groups.xml",
         "security/ir.model.access.csv",
+        'data/registry_data.xml',
         "views/motorcycle_registry_menuitems.xml",
         "views/motorcycle_registry_views.xml",
     ],
