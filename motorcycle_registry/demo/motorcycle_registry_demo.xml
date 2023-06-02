@@ -2,14 +2,12 @@
 <odoo>
     <data noupdate="1">
         <record id="registry_01" model="motorcycle.registry">
-            <field name="registry_number">000001</field>
             <field name="vin">4Y1KA65848R411454</field>
             <field name="first_name">Keanu</field>
             <field name="last_name">Reyes</field>
             <field name="current_mileage">10000</field>
         </record>
         <record id="registry_02" model="motorcycle.registry">
-            <field name="registry_number">000002</field>
             <field name="vin">4Y1KA65848U411425</field>
             <field name="first_name">Evel</field>
             <field name="last_name">Knievel</field>
@@ -17,7 +15,6 @@
             <field name="license_plate">KLV453</field>
         </record>
         <record id="registry_03" model="motorcycle.registry">
-            <field name="registry_number">000003</field>
             <field name="vin">4Y1KA65848I411439</field>
             <field name="first_name">Ewan</field>
             <field name="last_name">McGregor</field>
