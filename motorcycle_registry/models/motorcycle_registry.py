@@ -24,18 +24,18 @@ class MotorcycleRegistry(models.Model):
     registry_date = fields.Date(string='Registration Date')
 
         
-    # @api.constrains('license_plate')
-    # def _check_license_plate_size(self):
-    #     pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
-    #     for registry in self:
-    #         if registry.license_plate:
-    #             match = re.match(pattern, registry.license_plate)
-    #             if not match:
-    #                 raise ValidationError('Invalid License Plate')
+    @api.constrains('license_plate')
+    def _check_license_plate_size(self):
+        pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
+        for registry in self:
+            if registry.license_plate:
+                match = re.match(pattern, registry.license_plate)
+                if not match:
+                    raise ValidationError('Invalid License Plate')
                     
-    # @api.model_create_multi
-    # def create(self, vals_list):
-    #     for vals in vals_list:
-    #         if vals.get('registry_number', ('MRN0000')) == ('MRN0000'):
-    #             vals['registry_number'] = self.env['ir.sequence'].next_by_code('registry.number')
-    #     return super().create(vals_list)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('registry_number', ('MRN0000')) == ('MRN0000'):
+                vals['registry_number'] = self.env['ir.sequence'].next_by_code('registry.number')
+        return super().create(vals_list)
