@@ -13,7 +13,7 @@ class MotorcycleRegistry(models.Model):
     ]
 
     
-    registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='MRN0000')
+    registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='New')
     vin = fields.Char(string='VIN', required=True)
     # first_name = fields.Char(string='First Name', required=True)
     # last_name = fields.Char(string='Last Name', required=True)
@@ -33,40 +33,48 @@ class MotorcycleRegistry(models.Model):
     make = fields.Char(compute='_compute_from_vin')
     model = fields.Char(compute='_compute_from_vin')
 
-        
+    # this is better
     @api.constrains('license_plate')
     def _check_license_plate_size(self):
         pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
-        for registry in self:
-            if registry.license_plate:
-                match = re.match(pattern, registry.license_plate)
-                if not match:
-                    raise ValidationError('Odoopsie! Invalid License Plate')
+        for registry in self.filtered(lambda r: r.license_plate):
+            match = re.match(pattern, registry.license_plate)
+            if not match:
+                raise ValidationError('Odoopsie! Invalid License Plate')
+                    
+    # @api.constrains('license_plate')
+    # def _check_license_plate_size(self):
+    #     pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
+    #     for registry in self
+    #         if registry.license_plate:
+    #             match = re.match(pattern, registry.license_plate)
+    #             if not match:
+    #                 raise ValidationError('Odoopsie! Invalid License Plate')
  
     @api.constrains('vin')
     def _check_vin_pattern(self):
         pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{6}$'
-        for registry in self:
-            if registry.vin:
-                match = re.match(pattern, registry.vin)
-                if not match:
-                    raise ValidationError('Odoopsie! Invalid VIN')
+        for registry in self.filtered(lambda r: r.vin):
+            match = re.match(pattern, registry.vin)
+            if not match:
+                raise ValidationError('Odoopsie! Invalid VIN')
                     
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get('registry_number', ('MRN0000')) == ('MRN0000'):
+            if vals.get('registry_number', ('New')) == ('New'):
                 vals['registry_number'] = self.env['ir.sequence'].next_by_code('registry.number')
         return super().create(vals_list)
     
     @api.depends('vin')
     def _compute_from_vin(self):
-        for registry in self:
-            if registry.vin:
-                registry.brand = registry.vin[:2]
-                registry.make = registry.vin[2:4]
-                registry.model = registry.vin[4:6]
-            else:
-                registry.brand = False
-                registry.make = False
-                registry.model = False
+        registries_with_vin = self.filtered(lambda r: r.vin)
+        registries_with_vin._check_vin_pattern()
+        for registry in registries_with_vin:
+            registry.brand = registry.vin[:2]
+            registry.make = registry.vin[2:4]
+            registry.model = registry.vin[4:6]
+        for registry in (self - registries_with_vin):
+            registry.brand = False
+            registry.make = False
+            registry.model = False

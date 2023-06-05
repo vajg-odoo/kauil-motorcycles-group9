@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="motorcycle_compare">
+        <t t-call="website.layout">
+            <t t-set="title">Comparison</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <h1>Motorcycle</h1>
+                    <t t-foreach="product" t-as="product">
+                        <h3>
+                            <t t-out="product.id"/>
+                            <t t-out="product.name"/>
+                        </h3>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

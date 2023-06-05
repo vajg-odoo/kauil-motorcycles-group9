@@ -9,15 +9,16 @@ class ProductTemplate(models.Model):
                                         ('xl','Extra Large'),],
                                         copy=False
                                        )
-    brand = fields.Char()
     charge_time = fields.Float()
     curb_weight = fields.Float()
-    horsepower = fields.Integer()
+    horsepower = fields.Float()
     launch_date = fields.Date()
     make = fields.Char()
-    range = fields.Integer()
-    top_speed = fields.Integer()
-    torque = fields.Integer()
+    model = fields.Char()
+    range = fields.Float()
+    top_speed = fields.Float()
+    torque = fields.Float()
+    year = fields.Integer()
     
     detailed_type = fields.Selection(selection_add=[('motorcycle','Motorcycle')], 
                             ondelete={'motorcycle': 'set product'},
