@@ -9,7 +9,7 @@ class MotorcycleRegistry(models.Model):
     _description = 'Motorcycle Registry'
     _rec_name = 'registry_number'
     _sql_constraints = [
-        ('vin_unique', 'UNIQUE(vin)', 'Another registration for this VIN Number already exists.')
+        ('vin_unique', 'UNIQUE(vin)', 'Odoopsie! Another registration for this VIN Number already exists.')
     ]
 
     
@@ -41,7 +41,7 @@ class MotorcycleRegistry(models.Model):
             if registry.license_plate:
                 match = re.match(pattern, registry.license_plate)
                 if not match:
-                    raise ValidationError('Invalid License Plate')
+                    raise ValidationError('Odoopsie! Invalid License Plate')
  
     @api.constrains('vin')
     def _check_vin_pattern(self):
@@ -50,7 +50,7 @@ class MotorcycleRegistry(models.Model):
             if registry.vin:
                 match = re.match(pattern, registry.vin)
                 if not match:
-                    raise ValidationError('Invalid VIN')
+                    raise ValidationError('Odoopsie! Invalid VIN')
                     
     @api.model_create_multi
     def create(self, vals_list):
@@ -62,6 +62,11 @@ class MotorcycleRegistry(models.Model):
     @api.depends('vin')
     def _compute_from_vin(self):
         for registry in self:
-            registry.brand = registry.vin[:2]
-            registry.make = registry.vin[2:4]
-            registry.model = registry.vin[4:6]
+            if registry.vin:
+                registry.brand = registry.vin[:2]
+                registry.make = registry.vin[2:4]
+                registry.model = registry.vin[4:6]
+            else:
+                registry.brand = False
+                registry.make = False
+                registry.model = False
