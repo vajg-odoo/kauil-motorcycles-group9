@@ -12,10 +12,27 @@
             <xpath expr="//sheet//notebook" position="inside">
                 <page string="Motorcycle Data" attrs="{'invisible':[('detailed_type','!=', 'motorcycle')]}">
                     <group>
-                        <field name="brand"/>
-                        <field name="make"/>
-                        <field name="battery_capacity"/>
-                        <field name="launch_date"/>
+                        <group>
+                            <separator string="Motorcycle Information"/>
+                            <field name="brand"/>
+                            <field name="make"/>
+                            <field name="curb_weight"/>
+                            <field name="launch_date"/>
+                        </group>
+                        <group>
+                            <separator string="Motor Information"/>
+                            <field name="horsepower"/>
+                            <field name="top_speed"/>
+                            <field name="torque"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <separator string="Power Information"/>
+                            <field name="battery_capacity"/>
+                            <field name="charge_time"/>
+                            <field name="range"/>
+                        </group>
                     </group>
                 </page>
             </xpath>

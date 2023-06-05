@@ -3,10 +3,21 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
     
+    battery_capacity = fields.Selection(selection=[('xs','Small'),
+                                        ('0m','Medium'),
+                                        ('0l','Larga'),
+                                        ('xl','Extra Large'),],
+                                        copy=False
+                                       )
     brand = fields.Char()
-    make = fields.Char()
-    battery_capacity = fields.Char()
+    charge_time = fields.Float()
+    curb_weight = fields.Float()
+    horsepower = fields.Integer()
     launch_date = fields.Date()
+    make = fields.Char()
+    range = fields.Integer()
+    top_speed = fields.Integer()
+    torque = fields.Integer()
     
     detailed_type = fields.Selection(selection_add=[('motorcycle','Motorcycle')], 
                             ondelete={'motorcycle': 'set product'},
