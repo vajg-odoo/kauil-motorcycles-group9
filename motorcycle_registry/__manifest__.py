@@ -15,7 +15,7 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     
     "license": "OPL-1",
     
-    "depends": ["stock", "web"],
+    "depends": ["stock", "website"],
     
     "data": [
         "security/motorcycle_registry_groups.xml",
@@ -29,6 +29,7 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     
     "demo": [
         "demo/motorcycle_registry_demo.xml",
+        "demo/product_demo.xml",
     ],
     
     "author": "kauil-motors",

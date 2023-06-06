@@ -33,15 +33,7 @@ class MotorcycleRegistry(models.Model):
     make = fields.Char(compute='_compute_from_vin')
     model = fields.Char(compute='_compute_from_vin')
 
-    # this is better
-    @api.constrains('license_plate')
-    def _check_license_plate_size(self):
-        pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
-        for registry in self.filtered(lambda r: r.license_plate):
-            match = re.match(pattern, registry.license_plate)
-            if not match:
-                raise ValidationError('Odoopsie! Invalid License Plate')
-                    
+    # This method works, but it's better to filter the recordset before iterating over it, like in the example below                
     # @api.constrains('license_plate')
     # def _check_license_plate_size(self):
     #     pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
@@ -50,6 +42,16 @@ class MotorcycleRegistry(models.Model):
     #             match = re.match(pattern, registry.license_plate)
     #             if not match:
     #                 raise ValidationError('Odoopsie! Invalid License Plate')
+    
+    # This is a better solution than the code above.
+    
+    @api.constrains('license_plate')
+    def _check_license_plate_size(self):
+        pattern = '^[A-Z]{1,3}\d{1,4}[A-Z]{0,2}$'
+        for registry in self.filtered(lambda r: r.license_plate):
+            match = re.match(pattern, registry.license_plate)
+            if not match:
+                raise ValidationError('Odoopsie! Invalid License Plate')
  
     @api.constrains('vin')
     def _check_vin_pattern(self):
@@ -58,6 +60,9 @@ class MotorcycleRegistry(models.Model):
             match = re.match(pattern, registry.vin)
             if not match:
                 raise ValidationError('Odoopsie! Invalid VIN')
+            if not registry.vin[0:2] == 'KA':
+                raise ValidationError('Odoopsie! Only motorcycles from Kauil Motors are allowed')
+                
                     
     @api.model_create_multi
     def create(self, vals_list):
