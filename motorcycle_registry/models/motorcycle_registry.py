@@ -55,8 +55,7 @@ class MotorcycleRegistry(models.Model):
  
     @api.constrains('vin')
     def _check_vin_pattern(self):
-        # change last \d{6} to \d{5} to match vin example with serial (13 digit vin)
-        pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'
+        pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{6}$'
         for registry in self.filtered(lambda r: r.vin):
             match = re.match(pattern, registry.vin)
             if not match:
