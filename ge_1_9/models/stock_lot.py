@@ -8,7 +8,7 @@ class StockLot(models.Model):
         if product.product_tmpl_id.detailed_type == 'motorcycle' and product.tracking != "none":
             if product.product_tmpl_id.make and product.product_tmpl_id.model and product.product_tmpl_id.year:
                 # Using make,model,year but sidenote motorcycle_registry uses brand,make,model 
-                vin_str = str(product.product_tmpl_id.make) + str(product.product_tmpl_id.model) + str(product.product_tmpl_id.year)
+                vin_str = str(product.product_tmpl_id.make)[:2] + str(product.product_tmpl_id.model)[:2] + str(product.product_tmpl_id.year)[:2]
                 vin_str += str(self.env['ir.sequence'].next_by_code('stock.lot.serial'))
                 return vin_str
         else:
