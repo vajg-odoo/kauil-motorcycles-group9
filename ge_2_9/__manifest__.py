@@ -12,9 +12,10 @@
     
     "license": "OPL-1",
     
-    "depends": ["motorcycle_registry"],
+    "depends": ["ge_1_9"],
     
     "data": [
+        "views/stock_lot_inherit.xml",
     ],
     
     "demo": [
