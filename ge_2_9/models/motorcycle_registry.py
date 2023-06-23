@@ -9,7 +9,7 @@ class MotorcycleRegistry(models.Model):
 
     lot_ids = fields.One2many(comodel_name="stock.lot", inverse_name="registry_number")
     lot_id = fields.Many2one(comodel_name="stock.lot", compute="compute_lot", inverse="lot_inverse")
-    sale_id = fields.Char(String="Sale Id")
+    sale_id = fields.Char(string="Sale Id")
 
     @api.constrains('lot_id')
     def _check_lot_ids_singular(self):

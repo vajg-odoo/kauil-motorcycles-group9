@@ -28,8 +28,6 @@ This Module is used to keep track of the Motorcycle Reistration and Ownership of
     ],
     
     "demo": [
-        "demo/motorcycle_registry_demo.xml",
-        "demo/product_demo.xml",
     ],
     
     "author": "kauil-motors",
