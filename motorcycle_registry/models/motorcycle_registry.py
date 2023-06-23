@@ -12,9 +12,9 @@ class MotorcycleRegistry(models.Model):
         ('vin_unique', 'UNIQUE(vin)', 'Odoopsie! Another registration for this VIN Number already exists.')
     ]
 
-    
-    registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='New')
     vin = fields.Char(string='VIN', required=True)
+    registry_number = fields.Char('Registry Number', copy=False, required=True, readonly=True, default='New')
+    # vin = fields.Char(string='VIN', required=True)
     # first_name = fields.Char(string='First Name', required=True)
     # last_name = fields.Char(string='Last Name', required=True)
     picture = fields.Image(string='Photograph')
