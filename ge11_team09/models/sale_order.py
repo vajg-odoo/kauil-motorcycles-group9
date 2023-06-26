@@ -9,13 +9,11 @@ class SaleOrder(models.Model):
     
     @api.depends("partner_shipping_id")
     def _compute_warehouse_id(self):
-        customer_address = self._compute_geolocations(self.partner_shipping_id)
-        print(self)
-        for record in self:
-            print(record, record.warehouse_id)
-            warehouses = self.env['stock.warehouse'].search([]).filtered(lambda r: r.code != "WH")
+        warehouses = self.env['stock.warehouse'].search([]).filtered(lambda r: r.code != "WH")
+        for sale_order in self:
+            customer_address = self._compute_geolocations(sale_order.partner_shipping_id)
             closest_warehouse = sorted(warehouses, key = lambda wh: self._compute_distance_to_customer(wh, customer_address))[0]
-            self.warehouse_id = closest_warehouse
+            sale_order.warehouse_id = closest_warehouse
             
     def _compute_distance_to_customer(self, warehouse, customer_location):
         warehouse_location = self._compute_geolocations(warehouse.partner_id)
