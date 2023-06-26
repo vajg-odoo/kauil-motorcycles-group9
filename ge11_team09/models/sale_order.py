@@ -5,7 +5,7 @@ from geopy.distance import geodesic
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
     
-    warehouse_id = fields.Many2one(required = True, stored = True, copy = True, compute = '_compute_warehouse_id', readonly=True)
+    warehouse_id = fields.Many2one(required = True, store = True, copy = True, compute = '_compute_warehouse_id', readonly=True)
     
     @api.depends("partner_shipping_id")
     def _compute_warehouse_id(self):
