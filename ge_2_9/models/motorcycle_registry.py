@@ -12,25 +12,33 @@ class MotorcycleRegistry(models.Model):
     # for here, we grab 'stock_ids' and using it to compute our result and show it to users
     stock_id = fields.Many2one(comodel_name='stock.lot', ondelete='restrict', 
                                compute="_compute_from_stock_ids", string='Primary Stock')
+    
+    # add this sale_id for the fields
+    sale_id = fields.Char(string="Sale Id")
 
 
     @api.constrains('stock_ids')
     def _one_stock_ids(self):   
-        self.ensure_one()   
+        # self.ensure_one()   
         # adding logic that only allow one stock_ids exist
         # so user can not create one more
         for registry_entry in self:
             if registry_entry.stock_ids:
-                if len(self.stock_ids) >= 2:
+                if len(registry_entry.stock_ids) >= 2:
                     raise ValidationError('Odoopsie! Only one stock number for one motorcycle model')
 
     @api.depends('stock_ids')
     def _compute_from_stock_ids(self):
-        # only return the top 1 elem
         for registry_entry in self:
             if registry_entry.stock_ids:
-                self.stock_id = self.stock_ids[:1]
-                return self.stock_ids[:1]
+                registry_entry.stock_id = registry_entry.stock_ids[:1]
+            else:
+                # setting default value for it
+                registry_entry.stock_id = False
+
+    
+    # maybe doing the inverse part
+
             
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    // first override the view for motorcycle_registry_views.xml-->
+<!--    // add the map view on the view_mode-->
+    <record id="motorcycle_registry.registry_list_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,map</field>
+    </record>
+
+<!--    // then adding the record for the view that use map-->
+<!--    // and res_partner="owner_id" which is use in motorcycle regsitry-->
+    <record id="motorcycle_registry_map_view_map" model="ir.ui.view">
+        <field name="name">motorcycle.registry.view.map</field>
+        <field name="model">motorcycle.registry</field>
+
+        <field name="arch" type="xml">
+            <map res_partner="owner_id">
+                <field name="vin"/>
+            </map>
+        </field>
+
+    </record>
+</odoo>
+

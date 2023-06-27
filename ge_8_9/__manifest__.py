@@ -1,9 +1,9 @@
 {
-    "name": "ge2",
+    "name": "ge8",
     
-    "summary": "Motorcycles VIN/Serial Setter",
+    "summary": "Invoice VIN motorcycle",
     
-    "description": """This Module is used or the serial number to be generated in the format of motorcycle VIN.
+    "description": """Adding VIN for the Invoice Line but only for motorcycle registry.
     """,
     
     "version": "0.1",
@@ -12,11 +12,10 @@
     
     "license": "OPL-1",
     
-    "depends": ["ge_1_9"],
+    "depends": ["motorcycle_registry"],
     
     "data": [
-        "views/stock_lot_inherit.xml",
-        "views/motorcycle_registry_inherit.xml",
+        "views/motorcycle_registry_vin_invoice_line.xml",
     ],
     
     "demo": [

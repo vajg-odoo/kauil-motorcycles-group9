@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="motorcycle_registry_view_form_inherit_ge_2_9" model="ir.ui.view">
+            <field name="name">motorcycle.registry.view.form.inherit.ge.2.9</field>
+            <field name="model">motorcycle.registry</field>
+
+            <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='registry_date']" position="after">
+
+                    <field name="stock_id"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+            <record id="motorcycle_registry_view_tree_inherit_ge_2_9" model="ir.ui.view">
+            <field name="name">motorcycle.registry.view.list.inherit.ge.2.9</field>
+            <field name="model">motorcycle.registry</field>
+
+            <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_list"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='registry_number']" position="after">
+                
+                    <field name="stock_id"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+</odoo>

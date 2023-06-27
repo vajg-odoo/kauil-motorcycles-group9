@@ -5,5 +5,4 @@ class StockLot(models.Model):
 
     # adding the Many2one field to it
 
-    registry_id = fields.Many2one(comodel_name='motorcycle.registry', ondelete='restrict', string='Motorcyle Registry')
-
+    registry_id = fields.Many2one(comodel_name='motorcycle.registry', ondelete='cascade', string='Motorcyle Registry')
