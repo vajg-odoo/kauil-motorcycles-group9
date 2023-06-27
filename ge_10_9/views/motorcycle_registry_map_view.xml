@@ -3,6 +3,8 @@
 <!--    // first override the view for motorcycle_registry_views.xml-->
 <!--    // add the map view on the view_mode-->
     <record id="motorcycle_registry.registry_list_action" model="ir.actions.act_window">
+        <field name="name">Registry</field>
+        <field name="res_model">motorcycle.registry</field>
         <field name="view_mode">tree,form,map</field>
     </record>
 
@@ -13,9 +15,8 @@
         <field name="model">motorcycle.registry</field>
 
         <field name="arch" type="xml">
-            <map res_partner="owner_id">
-                <field name="vin"/>
-            </map>
+            <map res_partner="owner_id"/>
+<!--                <field name="vin"/>-->
         </field>
 
     </record>
