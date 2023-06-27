@@ -15,7 +15,7 @@
     "depends": ["motorcycle_registry"],
     
     "data": [
-        "views/motorcycle_registry_vin_invoice_line.xml",
+        # "views/motorcycle_registry_vin_invoice_line.xml",
     ],
     
     "demo": [
