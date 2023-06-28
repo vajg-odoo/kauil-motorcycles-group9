@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="motorcycle_form_inherit_ge_3_9" model="ir.ui.view">
+        <field name="name">motorcycle.registry.registry.form.inherit.ge.3.9</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//separator" position="before">
+                <button name="action_view_registry"
+                        type="object"
+                        class="btn-primary">
+                        <div class="o_field_widget o_stat_info">
+                            View In Portal
+                        </div>
+                    </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

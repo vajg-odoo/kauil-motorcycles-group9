@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_registries_menu_motorcycle" name="Portal layout : motorcycle registry menu entries" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'registries' or motorcycle_registry" t-attf-class="breadcrumb-item #{'active ' if not motorcycle_registry else ''}">
+                <a t-if="motorcycle_registry" t-attf-href="/my/registries?{{ keep_query() }}">Motorcycle Registries</a>
+                <t t-else="">Motorcycle Registries</t>
+            </li>
+            <li t-if="motorcycle_registry" class="breadcrumb-item active">
+                <t t-out="motorcycle_registry.registry_number"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_motorcycle" name="Show Motorcycle Registries" customize_show="True" inherit_id="portal.portal_my_home" priority="60">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Motorcycle Registries</t>
+                <t t-set="url" t-value="'/my/registries'"/>
+                <t t-set="placeholder_count" t-value="'motorcycle_registry_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_registries" name="My motorcycle registries">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Motorcycle Registries</t>
+            </t>
+            <t t-if="entrys" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>MRN</th>
+                        <th>VIN</th>
+                        <th class="text-end">Email</th>
+                    </tr>
+                </thead>
+                <t t-foreach="entrys" t-as="registry">
+                    <tr t-attf-style="{{ 'background-color: #fc99ff;' if registry.owner_id.id == user.id else false }}">
+                        <td><a t-att-href="registry.get_portal_url()"><t t-out="registry.registry_number"/></a></td>
+                        <td><a t-att-href="registry.get_portal_url()"><t t-out="registry.vin"/></a></td>
+                        <td class="text-end"><a t-field="registry.owner_email" /></td>
+                    </tr>
+                </t>
+            </t> 
+            <p t-else="">There are currently no public motorycle registries</p>
+        </t>
+    </template>
+
+    <template id="motorcycle_registry_portal_template" name="Motorcycle Registry Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div id="quote_content" class="col-12 mt16 col-lg justify-content-end">
+                <div t-attf-class="card #{'pb-5' if report_type == 'html' else ''}" id="portal_registry_content">
+                        <div t-call="ge_3_9.motorcycle_registry_portal_content"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="motorcycle_registry_portal_content" name="Motorcycle Registry Portal Content">
+        <!-- Intro -->
+        <div id="introduction" t-attf-class="pb-2 pt-3 #{'card-header bg-white' if report_type == 'html' else ''}">
+            <h2 class="my-0">
+                <t t-out="motorcycle_registry.brand"/>
+                <t t-out="motorcycle_registry.make"/>
+                <t t-out="motorcycle_registry.model"/>
+            </h2>
+        </div>
+
+        <div t-attf-class="#{'card-body' if report_type == 'html' else ''}">
+            <!-- Informations -->
+            <div id="informations">
+                <div class="row" id="registry_details">
+                    <div class="mb-3 col-6">
+                        <strong>Registry Number:</strong>
+                        <span t-out="motorcycle_registry.registry_number"/>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>VIN:</strong>
+                        <!-- <span t-out="motorcycle_registry.vin"/> -->
+                        <span t-field="motorcycle_registry.vin"/>
+                    </div>
+                </div>
+                <div class="row" id="mileage_plate">
+                    <div class="mb-3 col-6">
+                        <strong>Current Mileage:</strong>
+                        <span t-out="motorcycle_registry.current_mileage"/>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>License Plate:</strong>
+                        <span t-out="motorcycle_registry.license_plate"/>
+                    </div>
+                </div>
+                <div class="row" id="owner_details">
+                    <div class="col-12">
+                        <strong>Owner Information:</strong>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>Name:</strong>
+                        <span t-field="motorcycle_registry.owner_id.name"/>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>Phone:</strong>
+                        <span t-out="motorcycle_registry.owner_phone"/>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>Email:</strong>
+                        <span t-out="motorcycle_registry.owner_email"/>
+                    </div>
+                </div>
+                <div class="row" id="registry_dates">
+                    <div class="mb-3 col-6">
+                        <strong>Registry Date:</strong>
+                        <span t-field="motorcycle_registry.registry_date" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <strong>Certificate Title:</strong>
+                        <span t-out="motorcycle_registry.certificate_title"/>
+                    </div>
+                </div>
+                <div class="row" id="picture">
+                    <div class="col-12">
+                        <strong>Picture:</strong>
+                    </div>
+                    <div class="col-12">
+                        <img t-att-src="motorcycle_registry.picture" style="max-height: 200px; max-width: 100%;" alt="Motorcycle Picture"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
