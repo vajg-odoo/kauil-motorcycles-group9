@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="product.pricelist" id="discount_list">
+            <field name="name">Discount</field>
+            <field name="selectable" eval="True" />
+            <field name="sequence">3</field>
+            <field name="currency_id" ref="base.USD"/>
+        </record>
+
+        <record id="EV_discount" model="product.pricelist.item">
+            <field name="pricelist_id" ref="discount_list"/>
+            <field name="base">list_price</field>
+            <field name="price_discount">2500</field>
+        </record>
+    </data>
+</odoo>
