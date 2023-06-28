@@ -16,7 +16,7 @@ class ProductTemplate(models.Model):
             else:
                 # set the default name for it
                 # I just copy the original version
-                record.name = ""
+                record.name = record.name
 
 
 
