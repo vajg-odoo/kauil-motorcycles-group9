@@ -1,0 +1,16 @@
+from odoo import api, fields, models
+
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
+
+    motorcycle_registry_id = fields.Many2one(comodel_name="motorcycle.registry", string="Motorcycle Registry", ondelete="cascade")
+    name = fields.Char(compute="_compute_name", store=True)
+
+    @api.depends('motorcycle_registry_id.year', 'motorcycle_registry_id.make', 'motorcycle_registry_id.model')
+    def _compute_name(self):
+        for record in self:
+            motorcycle = record.motorcycle_registry_id
+            if motorcycle:
+                record.name = f"{motorcycle.year} {motorcycle.make} {motorcycle.model}"
+            else:
+                record.name = "Undefined"
