@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="repair_order_repair_form_inherit_ge_4_9" model="ir.ui.view">
+        <field name="name">repair.order.repair.form.inherit.ge.4.9</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="registry_id"/>
+                <field name="mileage"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
